@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN TOKENS ──────────────────────────────────────────────────────── */
+:root {
+  --p: #8B3FD9;
+  --p2: #A855F7;
+  --pk: #EC4899;
+  --bg: #08080F;
+  --bg2: #0F0F1A;
+  --card: #13131F;
+  --card2: #1C1C2E;
+  --bdr: rgba(255,255,255,0.07);
+  --bdr2: rgba(255,255,255,0.12);
+  --txt: #F1F1FF;
+  --dim: #6B6B8A;
+  --dim2: #9090B0;
+  --ok: #22C55E;
+  --warn: #F59E0B;
+  --err: #EF4444;
+  --glow-p: rgba(139,63,217,0.3);
+  --glow-pk: rgba(236,72,153,0.2);
+  --grad: linear-gradient(135deg, var(--p), var(--pk));
+  --grad-soft: linear-gradient(135deg, rgba(139,63,217,0.15), rgba(236,72,153,0.08));
+}
+[data-theme="light"] {
+  --bg: #F8FAFC;
+  --bg2: #F1F5F9;
+  --card: #FFFFFF;
+  --card2: #F1F5F9;
+  --bdr: rgba(0,0,0,0.08);
+  --bdr2: rgba(0,0,0,0.12);
+  --txt: #0F172A;
+  --dim: #64748B;
+  --dim2: #94A3B8;
+  --glow-p: rgba(139,63,217,0.2);
+  --glow-pk: rgba(236,72,153,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  width:400px;
+  background:var(--bg);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:var(--txt);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+/* scrollbar */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(139,63,217,0.4);border-radius:4px;}
+
+/* ── HEADER ─────────────────────────────────────────────────────────────── */
+.hdr{
+  background:linear-gradient(135deg,var(--card2) 0%,var(--bg) 100%);
+  padding:11px 14px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid var(--bdr);
+  position:relative;overflow:hidden;
+}
+.hdr::before{
+  content:'';position:absolute;top:-30px;left:-20px;
+  width:120px;height:120px;
+  background:radial-gradient(circle,var(--glow-p) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hdr::after{
+  content:'';position:absolute;top:-20px;right:40px;
+  width:80px;height:80px;
+  background:radial-gradient(circle,var(--glow-pk) 0%,transparent 70%);
+  pointer-events:none;
+}
+.logo-wrap{
+  width:32px;height:32px;flex-shrink:0;position:relative;z-index:1;
+  background:var(--grad);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px var(--glow-p);
+}
+.logo-wrap span{font-weight:900;font-size:17px;color:#fff;line-height:1;}
+.hdr-text{flex:1;position:relative;z-index:1;}
+.hdr-title{font-size:13px;font-weight:800;letter-spacing:.6px;color:#fff;}
+.hdr-sub{font-size:9px;font-weight:600;color:var(--dim2);letter-spacing:.4px;margin-top:1px;}
+.hdr-actions{display:flex;align-items:center;gap:6px;position:relative;z-index:1;}
+.icon-btn{
+  background:rgba(255,255,255,0.06);
+  border:1px solid var(--bdr);
+  color:var(--dim2);
+  cursor:pointer;border-radius:8px;
+  width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+  font-size:13px;
+}
+.icon-btn:hover{background:rgba(255,255,255,0.12);color:#fff;border-color:var(--bdr2);}
+#btn-active-dl{position:relative;}
+#badge-dl{
+  position:absolute;top:-5px;right:-5px;
+  background:var(--pk);color:#fff;
+  font-size:8px;font-weight:900;
+  border-radius:8px;padding:1px 4px;
+  border:2px solid var(--bg);
+  display:none;
+}
+.open-app-btn{
+  background:var(--grad);
+  border:none;color:#fff;
+  border-radius:8px;padding:5px 12px;
+  font-size:10px;font-weight:800;
+  cursor:pointer;letter-spacing:.5px;
+  box-shadow:0 2px 10px rgba(139,63,217,0.4);
+  transition:all .2s;font-family:inherit;
+}
+.open-app-btn:hover{box-shadow:0 4px 16px rgba(139,63,217,0.6);transform:translateY(-1px);}
+
+/* ── FOOTER ─────────────────────────────────────────────────────────────── */
+.ftr{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:9px 14px;
+  border-top:1px solid var(--bdr);
+  background:rgba(0,0,0,0.3);
+}
+.ftr span{font-size:10px;color:var(--dim);font-weight:600;}
+
+/* ── SETTINGS MENU ──────────────────────────────────────────────────────── */
+.menu-list { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.menu-item {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--card); border: 1px solid var(--bdr);
+  border-radius: 14px; padding: 14px 16px;
+  cursor: pointer; transition: all 0.2s;
+}
+.menu-item:hover { border-color: rgba(139,63,217,0.4); background: rgba(139,63,217,0.05); transform: translateY(-1px); }
+.menu-item-left { display: flex; align-items: center; gap: 12px; }
+.menu-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(139,63,217,0.1); border: 1px solid rgba(139,63,217,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--p2); font-size: 16px; transition: all 0.2s;
+}
+.menu-item:hover .menu-icon { background: var(--grad); color: #fff; border-color: transparent; box-shadow: 0 4px 12px var(--glow-p); }
+.menu-title { font-size: 13px; font-weight: 700; color: var(--txt); margin-bottom: 2px; }
+.menu-sub { font-size: 10px; color: var(--dim); }
+.menu-arrow { color: var(--dim2); transition: all 0.2s; }
+.menu-item:hover .menu-arrow { color: #fff; transform: translateX(2px); }
+
+/* ── SETTINGS TOGGLES ────────────────────────────────────────────────────── */
+.switch { position: relative; display: inline-block; width: 40px; height: 22px; margin: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.1); transition: .3s; border-radius: 34px; border: 1px solid var(--bdr); }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: #fff; transition: .3s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--p); border-color: transparent; box-shadow: 0 0 10px var(--glow-p); }
+input:checked + .slider:before { transform: translateX(18px); }
+
+.theme-btn {
+  flex: 1; padding: 12px; border-radius: 12px; background: var(--card); 
+  border: 1px solid var(--bdr); cursor: pointer; display: flex; 
+  flex-direction: column; align-items: center; gap: 8px; transition: all 0.2s;
+  font-family: inherit;
+}
+.theme-btn:hover { background: rgba(255,255,255,0.05); }
+.theme-btn.active { border-color: var(--p); background: rgba(139,63,217,0.05); }
+.theme-circle { width: 24px; height: 24px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+.theme-btn span { font-size: 11px; font-weight: 700; color: var(--dim); transition: all 0.2s; }
+.theme-btn.active span { color: var(--txt); }
+.no-anim * { transition: none !important; animation: none !important; }
+
+/* ── SCREENS ─────────────────────────────────────────────────────────────── */
+.screen{display:none;}
+
+/* ── LOADING SCREEN ──────────────────────────────────────────────────────── */
+#screen-loading{padding:0;}
+.loading-body{padding:36px 20px;text-align:center;}
+.loader-ring{
+  width:52px;height:52px;margin:0 auto 20px;
+  position:relative;
+}
+.loader-ring::before,.loader-ring::after{
+  content:'';position:absolute;inset:0;
+  border-radius:50%;
+  border:3px solid transparent;
+}
+.loader-ring::before{
+  border-top-color:var(--p);
+  border-right-color:rgba(139,63,217,0.3);
+  animation:spin .9s linear infinite;
+}
+.loader-ring::after{
+  border-bottom-color:var(--pk);
+  border-left-color:rgba(236,72,153,0.2);
+  animation:spin 1.4s linear infinite reverse;
+}
+.loader-logo{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:16px;color:var(--p2);
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+#loading-msg{font-size:15px;font-weight:800;color:var(--txt);margin-bottom:6px;}
+#loading-sub{font-size:11px;color:var(--dim);line-height:1.6;margin-bottom:16px;}
+#btn-retry-load{
+  display:none;
+  background:var(--grad-soft);
+  border:1px solid rgba(139,63,217,0.35);
+  color:var(--p2);border-radius:10px;
+  padding:8px 22px;font-size:12px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
+#btn-retry-load:hover{background:rgba(139,63,217,0.2);box-shadow:0 4px 12px var(--glow-p);}
+
+/* ── INFO SCREEN ─────────────────────────────────────────────────────────── */
+.vinfo{
+  margin:12px 12px 0;
+  background:var(--card);
+  border:1px solid var(--bdr);
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+}
+.vinfo-thumb-wrap{position:relative;}
+#thumb-img{
+  width:100%;aspect-ratio:16/9;
+  object-fit:cover;background:#000;
+  display:block;
+}
+.thumb-placeholder{
+  width:100%;aspect-ratio:16/9;
+  background:linear-gradient(135deg,#1A0A2E,#0F051A);
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;
+}
+.vinfo-body{padding:10px 12px 12px;}
+.vtitle{
+  font-size:13px;font-weight:700;line-height:1.45;
+  margin-bottom:8px;
+  display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;
+  color:var(--txt);
+}
+.vmeta-row{display:flex;gap:6px;flex-wrap:wrap;}
+.vmeta-chip{
+  display:flex;align-items:center;gap:4px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--bdr);
+  border-radius:20px;padding:3px 8px;
+  font-size:10px;font-weight:600;color:var(--dim2);
+}
+.vmeta-chip.accent{color:var(--p2);background:rgba(139,63,217,0.1);border-color:rgba(139,63,217,0.2);}
+
+/* ── TABS ─────────────────────────────────────────────────────────────────── */
+.tabs{
+  display:flex;margin:10px 12px 0;
+  background:rgba(255,255,255,0.03);
+  padding:3px;border-radius:12px;
+  border:1px solid var(--bdr);
+  position:relative;
+}
+.tab-item{
+  flex:1;padding:8px 4px;
+  text-align:center;
+  font-size:11px;font-weight:700;
+  cursor:pointer;z-index:1;
+  transition:color .25s;
+  color:var(--dim);letter-spacing:.3px;
+  display:flex;align-items:center;justify-content:center;gap:4px;
+}
+.tab-item.active{color:#fff;}
+.tab-item-icon{font-size:13px;}
+.tab-slider{
+  position:absolute;top:3px;bottom:3px;left:3px;
+  width:calc(50% - 2px);
+  background:var(--grad);
+  border-radius:9px;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 3px 12px var(--glow-p);
+}
+.tabs.audio-active .tab-slider{transform:translateX(100%);}
+
+/* ── QUALITY GRID ─────────────────────────────────────────────────────────── */
+.quality-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:8px;padding:10px 12px 14px;
+}
+.view-container{display:none;}
+.view-container.active{display:block;animation:fadeUp .2s ease-out;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+.item-btn{
+  background:var(--card);
+  border:1px solid var(--bdr);
+  border-radius:14px;
+  padding:12px 8px;
+  color:#fff;cursor:pointer;
+  transition:all .2s cubic-bezier(.4,0,.2,1);
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  position:relative;overflow:hidden;
+}
+.item-btn::before{
+  content:'';
+  position:absolute;inset:0;
+  background:var(--grad);
+  opacity:0;
+  transition:opacity .2s;
+}
+.item-btn:hover:not(:disabled){
+  border-color:rgba(139,63,217,0.5);
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(139,63,217,0.2);
+}
+.item-btn:hover:not(:disabled)::before{opacity:0.07;}
+.item-btn:disabled{opacity:.35;cursor:not-allowed;}
+.item-btn.best-badge{border-color:rgba(168,85,247,0.4);}
+.best-tag{
+  position:absolute;top:0;right:0;
+  background:var(--grad);
+  font-size:7px;font-weight:900;
+  color:#fff;padding:2px 7px;
+  border-radius:0 14px 0 8px;
+  letter-spacing:.5px;
+}
+.qlabel{font-size:15px;font-weight:800;position:relative;z-index:1;}
+.audio-btn .qlabel{font-size:11px;}
+.qsub{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;position:relative;z-index:1;}
+.qsize{
+  font-size:9px;font-weight:700;color:var(--p2);
+  margin-top:3px;
+  background:rgba(139,63,217,0.12);
+  padding:2px 6px;border-radius:4px;
+  position:relative;z-index:1;
+  transition:all .2s;
+}
+.item-btn:hover .qsize{color:#fff;background:rgba(255,255,255,0.15);}
+.aico{font-size:16px;margin-bottom:2px;position:relative;z-index:1;}
+.no-fmt{grid-column:1/-1;text-align:center;color:var(--dim);font-size:12px;padding:20px 0;}
+
+/* ── DOWNLOADING SCREEN ──────────────────────────────────────────────────── */
+#screen-downloading{padding:0;}
+.dl-card{
+  margin:12px 12px;
+  background:var(--card);
+  border:1px solid var(--bdr);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.dl-thumb-wrap{position:relative;overflow:hidden;}
+.dl-thumb-wrap img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0a0a15;display:block;}
+.dl-thumb-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(19,19,31,0.95));
+}
+.dl-body{padding:14px;}
+.dl-title-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;}
+.dl-badge{
+  background:var(--grad);color:#fff;
+  font-size:9px;font-weight:800;
+  padding:3px 8px;border-radius:20px;
+  white-space:nowrap;margin-top:2px;
+  box-shadow:0 2px 8px var(--glow-p);
+  flex-shrink:0;
+}
+#dl-title{font-size:12px;font-weight:700;line-height:1.4;flex:1;color:var(--txt);display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+#dl-status{font-size:11px;font-weight:600;margin-bottom:10px;color:var(--p2);}
+.dl-bar-wrap{position:relative;height:6px;background:rgba(139,63,217,.1);border-radius:20px;overflow:hidden;margin-bottom:10px;border:1px solid rgba(139,63,217,.15);}
+#dl-bar-fill{
+  height:100%;
+  background:var(--grad);
+  border-radius:20px;width:0%;
+  transition:width .6s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+#dl-bar-fill::after{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  animation:shimmer 1.8s infinite;
+}
+@keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+.dl-stats{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.dl-pct-big{font-size:22px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.dl-info-col{text-align:right;}
+.dl-speed-lbl{font-size:12px;font-weight:700;color:var(--txt);}
+.dl-eta-lbl,.dl-bytes-lbl{font-size:10px;color:var(--dim);}
+.dl-actions{display:flex;gap:8px;}
+#btn-back-dl{
+  flex:1;background:rgba(255,255,255,.04);
+  border:1px solid var(--bdr);color:var(--dim2);
+  border-radius:10px;padding:9px;font-size:11px;font-weight:700;
+  cursor:pointer;transition:all .2s;font-family:inherit;
+}
+#btn-back-dl:hover{background:rgba(255,255,255,.08);color:#fff;}
+#btn-cancel{
+  flex:2;background:rgba(239,68,68,.08);
+  border:1px solid rgba(239,68,68,.2);
+  color:#f87171;border-radius:10px;padding:9px;
+  font-size:11px;font-weight:700;cursor:pointer;
+  transition:all .2s;font-family:inherit;
+}
+#btn-cancel:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.4);}
+
+/* ── DONE SCREEN ─────────────────────────────────────────────────────────── */
+#screen-done{padding:0;}
+.done-card{
+  margin:12px 12px;
+  background:var(--card);
+  border:1px solid rgba(34,197,94,.2);
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 0 40px rgba(34,197,94,.08);
+}
+.done-hero{
+  background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(34,197,94,.04));
+  padding:16px;
+  display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid rgba(34,197,94,.12);
+}
+.done-icon{
+  width:44px;height:44px;
+  background:rgba(34,197,94,.15);
+  border:1px solid rgba(34,197,94,.3);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  box-shadow:0 0 20px rgba(34,197,94,.2);
+}
+.done-head{flex:1;}
+.done-head h3{font-size:13px;font-weight:800;color:var(--ok);margin-bottom:3px;}
+#done-title{font-size:11px;color:var(--dim2);display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+#done-thumb{width:100%;max-height:100px;object-fit:cover;background:#0a0a15;display:none;}
+.done-meta{padding:10px 14px;display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--bdr);}
+#done-type{font-size:9px;font-weight:700;color:var(--dim);background:rgba(255,255,255,.05);border:1px solid var(--bdr);padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;}
+#done-filename{font-size:11px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt);}
+#done-size{font-size:10px;color:var(--p2);font-weight:700;background:rgba(139,63,217,.1);padding:2px 6px;border-radius:4px;}
+.done-actions{padding:10px 12px;display:flex;gap:6px;border-bottom:1px solid var(--bdr);}
+.act-btn{
+  flex:1;min-width:0;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--bdr);color:var(--dim2);
+  border-radius:10px;padding:8px 6px;
+  font-size:10px;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  white-space:nowrap;font-family:inherit;
+}
+.act-btn:hover{background:rgba(139,63,217,.12);border-color:rgba(139,63,217,.35);color:#fff;}
+.act-btn.primary{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.25);color:var(--ok);}
+.act-btn.primary:hover{background:rgba(34,197,94,.15);}
+.done-footer{padding:10px 12px;}
+#btn-download-more{
+  width:100%;background:transparent;
+  border:1px solid var(--bdr);color:var(--dim);
+  border-radius:10px;padding:9px;
+  font-size:11px;font-weight:600;cursor:pointer;
+  transition:all .2s;font-family:inherit;
+}
+#btn-download-more:hover{border-color:rgba(139,63,217,.4);color:#fff;}
+input[type=hidden]{display:none;}
+
+/* ── ERROR SCREEN ────────────────────────────────────────────────────────── */
+#screen-error{padding:0;}
+.err-body{padding:32px 20px;text-align:center;}
+.err-icon-wrap{
+  width:60px;height:60px;margin:0 auto 16px;
+  background:rgba(239,68,68,.1);
+  border:1px solid rgba(239,68,68,.2);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+}
+.err-title{font-size:15px;font-weight:800;color:#f87171;margin-bottom:8px;}
+#error-msg{font-size:11px;color:var(--dim);line-height:1.6;margin-bottom:18px;}
+#btn-retry-dl{
+  background:var(--grad-soft);
+  border:1px solid rgba(139,63,217,.35);
+  color:var(--p2);border-radius:10px;
+  padding:9px 24px;font-size:12px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
+#btn-retry-dl:hover{box-shadow:0 4px 14px var(--glow-p);}
+
+/* ── RETRY TASK BTN ─────────────────────────────────────────────────────── */
+.retry-task-btn{
+  display:inline-flex;align-items:center;gap:4px;
+  background:rgba(139,63,217,.1);border:1px solid rgba(139,63,217,.3);
+  color:var(--p2);border-radius:6px;padding:4px 10px;
+  font-size:9px;font-weight:700;cursor:pointer;
+  transition:all .2s;font-family:inherit;margin-top:4px;
+}
+.retry-task-btn:hover{background:rgba(139,63,217,.2);}
+/* ── PLAYLIST SCREEN ──────────────────────────────────────────────────────── */
+#screen-playlist{padding:0;}
+.pl-prompt-body{padding:32px 20px;text-align:center;}
+.pl-emoji{
+  width:64px;height:64px;margin:0 auto 16px;
+  background:linear-gradient(135deg,rgba(139,63,217,.15),rgba(236,72,153,.08));
+  border:1px solid rgba(139,63,217,.2);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+}
+.pl-prompt-title{font-size:16px;font-weight:800;color:var(--txt);margin-bottom:8px;}
+.pl-prompt-sub{font-size:11px;color:var(--dim);margin-bottom:24px;line-height:1.6;}
+.pl-btn{
+  width:100%;padding:11px;
+  border-radius:12px;
+  font-size:12px;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-bottom:8px;font-family:inherit;
+}
+.pl-btn-primary{background:var(--grad);border:none;color:#fff;box-shadow:0 4px 14px var(--glow-p);}
+.pl-btn-primary:hover{box-shadow:0 6px 20px var(--glow-p);transform:translateY(-1px);}
+.pl-btn-secondary{background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--dim2);}
+.pl-btn-secondary:hover{background:rgba(255,255,255,.08);color:#fff;border-color:var(--bdr2);}
+.pl-btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.05);color:var(--dim);}
+.pl-btn-ghost:hover{border-color:var(--bdr);color:var(--dim2);}
+
+/* ── DOWNLOADS MANAGER ───────────────────────────────────────────────────── */
+#screen-all-downloads{padding:12px;min-height:200px;overflow-y:auto;padding-bottom:16px;}
+.mgr-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.mgr-back-btn{
+  background:rgba(255,255,255,.05);border:1px solid var(--bdr);
+  color:var(--dim2);border-radius:8px;
+  width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;flex-shrink:0;
+}
+.mgr-back-btn:hover{background:rgba(255,255,255,.1);color:#fff;}
+.mgr-title{font-size:14px;font-weight:800;flex:1;}
+.mgr-clear-btn{
+  background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);
+  color:#f87171;border-radius:8px;
+  width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;
+}
+.mgr-clear-btn:hover{background:rgba(239,68,68,.15);}
+.task-item{
+  position:relative;
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--bdr);
+  border-radius:14px;padding:10px;margin-bottom:8px;
+  cursor:default;transition:all .2s;
+}
+.task-item:hover{border-color:rgba(139,63,217,.3);background:rgba(139,63,217,.05);}
+.task-item.done{border-color:rgba(34,197,94,.2);background:rgba(34,197,94,.04);}
+.task-item.failed{border-color:rgba(239,68,68,.2);background:rgba(239,68,68,.03);}
+.task-thumb{
+  width:50px;height:50px;border-radius:10px;
+  object-fit:cover;flex-shrink:0;background:var(--card2);
+}
+.task-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding-right:26px;}
+.task-title{font-size:11px;font-weight:700;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.task-status-row{display:flex;justify-content:space-between;align-items:center;}
+.task-status-badge{
+  font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;
+  text-transform:uppercase;letter-spacing:.4px;
+}
+.badge-active{background:rgba(139,63,217,.15);color:var(--p2);}
+.badge-done{background:rgba(34,197,94,.12);color:var(--ok);}
+.badge-failed{background:rgba(239,68,68,.12);color:#f87171;}
+.badge-queued{background:rgba(245,158,11,.1);color:var(--warn);}
+.task-pct{font-size:10px;font-weight:800;color:var(--dim2);}
+.task-progress-bar{
+  width:100%;height:4px;
+  background:rgba(255,255,255,.05);
+  border-radius:4px;overflow:hidden;
+}
+.task-progress-fill{
+  height:100%;
+  background:var(--grad);
+  border-radius:4px;
+  transition:width .3s cubic-bezier(.4,0,.2,1);
+}
+.task-item.done .task-progress-fill{background:linear-gradient(90deg,#15803d,#22c55e);}
+.task-item.failed .task-progress-fill{background:linear-gradient(90deg,#991b1b,#ef4444);}
+.task-done-actions{display:flex;gap:6px;margin-top:4px;}
+.td-act-btn{
+  flex:1;background:rgba(255,255,255,.04);border:1px solid var(--bdr);
+  border-radius:6px;color:var(--dim);font-size:9px;font-weight:700;
+  padding:5px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:3px;
+  transition:all .2s;font-family:inherit;
+}
+.td-act-btn:hover{color:#fff;background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.25);}
+.td-act-btn.fld:hover{background:rgba(42,171,238,.08);border-color:rgba(42,171,238,.25);}
+.clear-task-btn{
+  position:absolute;right:8px;top:8px;
+  background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);
+  color:#f87171;border-radius:6px;
+  width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;padding:0;font-size:11px;
+}
+.clear-task-btn:hover{background:rgba(239,68,68,.2);}
+#btn-active-dl{position:relative;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:8px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:var(--dim);transition:all .2s;cursor:pointer;}
+#btn-active-dl:hover{color:#fff;border-color:var(--bdr2);}
+
+/* ── PLAYLIST ITEMS SCREEN ───────────────────────────────────────────────── */
+#screen-playlist-items{padding:0;display:flex;flex-direction:column;height:560px;}
+.pl-header{
+  background:linear-gradient(135deg,#1A0A2E,#0F051A);
+  padding:12px;display:flex;gap:10px;align-items:center;
+  border-bottom:1px solid rgba(139,63,217,.2);
+  flex-shrink:0;
+}
+.pl-thumb{width:72px;height:40px;object-fit:cover;border-radius:8px;background:var(--card2);}
+.pl-info{flex:1;min-width:0;}
+.pl-title{font-size:12px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
+.pl-meta{font-size:10px;color:rgba(255,255,255,0.6);}
+.pl-controls{
+  padding:9px 12px;display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid var(--bdr);background:var(--bg2);flex-shrink:0;
+}
+.pl-sel-count{font-size:12px;font-weight:700;color:var(--txt);}
+.pl-select-btn{
+  background:rgba(139,63,217,.12);border:1px solid rgba(139,63,217,.3);
+  color:var(--p2);border-radius:7px;padding:5px 12px;
+  font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;
+}
+.pl-select-btn:hover{background:rgba(139,63,217,.25);}
+.pl-list{flex:1;overflow-y:auto;padding:8px 12px;}
+.pl-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px;background:var(--card);border:1px solid var(--bdr);
+  border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .2s;
+}
+.pl-item:hover{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.04);}
+.pl-item.selected{border-color:rgba(139,63,217,.5);background:rgba(139,63,217,.08);}
+.pl-item-cb{
+  width:18px;height:18px;border:2px solid var(--dim);
+  border-radius:5px;display:flex;align-items:center;
+  justify-content:center;transition:all .2s;flex-shrink:0;
+}
+.pl-item.selected .pl-item-cb{border-color:var(--p);background:var(--p);}
+.pl-item.selected .pl-item-cb::after{content:'✓';color:#fff;font-size:11px;font-weight:900;}
+.pl-item-thumb{width:60px;height:34px;object-fit:cover;border-radius:6px;background:var(--card2);}
+.pl-item-info{flex:1;min-width:0;}
+.pl-item-title{font-size:11px;font-weight:700;color:var(--txt);display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.pl-item-dur{font-size:9px;color:var(--dim);margin-top:2px;font-weight:600;}
+.pl-footer{
+  padding:12px;border-top:1px solid var(--bdr);background:var(--bg);flex-shrink:0;
+}
+.pl-quality-sel{
+  width:100%;background:var(--card);border:1px solid var(--bdr);
+  color:var(--txt);border-radius:10px;padding:8px 12px;
+  font-size:12px;font-weight:600;margin-bottom:8px;font-family:inherit;
+}
+.pl-download-btn{
+  width:100%;background:var(--grad);border:none;color:#fff;
+  border-radius:12px;padding:12px;font-size:13px;font-weight:800;
+  cursor:pointer;box-shadow:0 4px 16px var(--glow-p);
+  transition:all .2s;font-family:inherit;
+}
+.pl-download-btn:hover{box-shadow:0 6px 22px var(--glow-p);transform:translateY(-1px);}
+.pl-download-btn:disabled{
+  background:var(--card2);border:1px solid var(--bdr);
+  color:var(--dim);box-shadow:none;cursor:not-allowed;transform:none;
+}
+
+/* ── MODALS ──────────────────────────────────────────────────────────────── */
+#modal-overlay, #modal-conflict-overlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.82);
+  z-index:999999;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+.modal-box{
+  background:var(--card);
+  border:1px solid var(--bdr2);
+  border-radius:18px;padding:22px;
+  width:280px;text-align:center;
+  margin:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 40px rgba(139,63,217,0.1);
+}
+.modal-title{font-size:15px;font-weight:800;color:var(--txt);margin-bottom:8px;}
+.modal-desc{font-size:11px;color:var(--dim);margin-bottom:20px;line-height:1.6;}
+.modal-actions{display:flex;gap:8px;}
+.modal-btn{
+  flex:1;border-radius:10px;padding:10px;
+  cursor:pointer;font-weight:700;font-size:12px;
+  transition:all .2s;font-family:inherit;
+  border:none;
+}
+.modal-btn-cancel{background:var(--card2);border:1px solid var(--bdr) !important;color:var(--dim2);}
+.modal-btn-cancel:hover{color:#fff;border-color:var(--bdr2) !important;}
+.modal-btn-confirm{background:var(--grad);color:#fff;box-shadow:0 3px 10px var(--glow-p);}
+.modal-btn-confirm:hover{box-shadow:0 5px 16px var(--glow-p);}
+.modal-btn-blue{background:rgba(42,171,238,.1);border:1px solid rgba(42,171,238,.3) !important;color:#2AABEE;}
+.modal-btn-blue:hover{background:rgba(42,171,238,.2);}
+.modal-btn-red{background:var(--err);color:#fff;}
+.modal-btn-red:hover{box-shadow:0 4px 12px rgba(239,68,68,.4);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="logo-wrap" style="background:transparent;box-shadow:none;"><img src="icons/icon128.png" style="width:100%;height:100%;border-radius:10px;object-fit:cover;"></div>
+  <div class="hdr-text">
+    <div class="hdr-title">ZYLOS</div>
+    <div class="hdr-sub">MEDIA DOWNLOADER · 1700+ SITES</div>
+  </div>
+  <div class="hdr-actions">
+    <button class="icon-btn" id="btn-refresh" title="Refresh">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+    </button>
+    <button class="icon-btn" id="btn-active-dl" title="Downloads">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      <span id="badge-dl">1</span>
+    </button>
+    <button class="icon-btn" id="btn-vpn-header" title="VPN Proxy">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+    </button>
+    <button class="icon-btn" id="btn-theme-toggle" title="Toggle Theme">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    <button class="icon-btn" id="btn-settings" title="Settings">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    </button>
+  </div>
+</div>
+
+<!-- SCREEN: SETTINGS MENU -->
+<div class="screen" id="screen-settings-menu" style="padding:0;min-height:300px;">
+  <div class="mgr-header" style="padding:12px; border-bottom:1px solid rgba(139,63,217,0.2); margin-bottom:0;">
+    <button class="mgr-back-btn" id="btn-back-settings-menu">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    </button>
+    <span class="mgr-title">Zylos Menu</span>
+  </div>
+  <div class="menu-list">
+    <div class="menu-item" id="menu-btn-vpn">
+      <div class="menu-item-left">
+        <div class="menu-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+        <div>
+          <div class="menu-title">VPN Proxy</div>
+          <div class="menu-sub">Cloudflare WARP Integration</div>
+        </div>
+      </div>
+      <div class="menu-arrow">❯</div>
+    </div>
+    <div class="menu-item" id="menu-btn-speed">
+      <div class="menu-item-left">
+        <div class="menu-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+        <div>
+          <div class="menu-title">Speed Tester</div>
+          <div class="menu-sub">Test connection & speeds</div>
+        </div>
+      </div>
+      <div class="menu-arrow">❯</div>
+    </div>
+    <div class="menu-item" id="menu-btn-port">
+      <div class="menu-item-left">
+        <div class="menu-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
+        <div>
+          <div class="menu-title">Connection & Port</div>
+          <div class="menu-sub">Manage desktop app integration</div>
+        </div>
+      </div>
+      <div class="menu-arrow">❯</div>
+    </div>
+    <div class="menu-item" id="menu-btn-appearance">
+      <div class="menu-item-left">
+        <div class="menu-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg></div>
+        <div>
+          <div class="menu-title">Appearance</div>
+          <div class="menu-sub">Theme and visual settings</div>
+        </div>
+      </div>
+      <div class="menu-arrow">❯</div>
+    </div>
+    <div class="menu-item" id="menu-btn-about">
+      <div class="menu-item-left">
+        <div class="menu-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+        <div>
+          <div class="menu-title">About Us</div>
+          <div class="menu-sub">Version info and details</div>
+        </div>
+      </div>
+      <div class="menu-arrow">❯</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: SETTINGS - PORT -->
+<div class="screen" id="screen-settings-port" style="padding:0;min-height:300px;">
+  <div class="mgr-header" style="padding:12px; border-bottom:1px solid rgba(139,63,217,0.2); margin-bottom:0;">
+    <button class="mgr-back-btn" id="btn-back-settings-port">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    </button>
+    <span class="mgr-title">Connection & Port</span>
+  </div>
+  <div style="padding:20px 16px;">
+    <!-- CONNECTION SECTION -->
+    <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#6B6B8A;margin-bottom:12px;border-bottom:1px solid var(--bdr);padding-bottom:6px;">PORT CONFIGURATION</div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="font-size:12px;font-weight:600;color:#9090B0;flex:0 0 auto;">Server Port</span>
+      <input id="settings-port-input" type="number" min="1024" max="65535" style="flex:1;background:#13131F;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#F1F1FF;padding:8px 10px;font-size:13px;font-weight:700;font-family:inherit;outline:none;"/>
+      <button id="btn-settings-save" style="background:linear-gradient(135deg,#8B3FD9,#EC4899);border:none;color:#fff;padding:9px 16px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:800;font-family:inherit;box-shadow:0 4px 12px var(--glow-p);">Save</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.03);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);margin-bottom:10px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div id="settings-live-dot" style="width:10px;height:10px;border-radius:50%;background:#EF4444;box-shadow:0 0 8px rgba(239,68,68,0.5);"></div>
+        <span id="settings-live-text" style="font-size:12px;font-weight:700;color:#EF4444;">Connecting...</span>
+      </div>
+      <button id="btn-settings-reset" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#6B6B8A;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:10px;font-weight:700;font-family:inherit;transition:all 0.2s;">Reset to :7734</button>
+    </div>
+    <div id="settings-feedback" style="font-size:12px;font-weight:600;margin-top:10px;text-align:center;min-height:16px;"></div>
+  </div>
+</div>
+
+<!-- SCREEN: SETTINGS - APPEARANCE -->
+<div class="screen" id="screen-settings-appearance" style="padding:0;min-height:300px;">
+  <div class="mgr-header" style="padding:12px; border-bottom:1px solid rgba(139,63,217,0.2); margin-bottom:0;">
+    <button class="mgr-back-btn" id="btn-back-settings-appearance">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    </button>
+    <span class="mgr-title">Appearance</span>
+  </div>
+  <div style="padding:20px 16px;">
+    
+    <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#6B6B8A;margin-bottom:12px;border-bottom:1px solid var(--bdr);padding-bottom:6px;">THEME COLOR</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;">
+      <button class="theme-btn active" data-theme="default">
+        <div class="theme-circle" style="background:linear-gradient(135deg, #8B3FD9, #EC4899);"></div>
+        <span>Twilight</span>
+      </button>
+      <button class="theme-btn" data-theme="ocean">
+        <div class="theme-circle" style="background:linear-gradient(135deg, #3B82F6, #06B6D4);"></div>
+        <span>Ocean</span>
+      </button>
+      <button class="theme-btn" data-theme="emerald">
+        <div class="theme-circle" style="background:linear-gradient(135deg, #10B981, #34D399);"></div>
+        <span>Emerald</span>
+      </button>
+      <button class="theme-btn" data-theme="light">
+        <div class="theme-circle" style="background:linear-gradient(135deg, #F8FAFC, #E2E8F0); border:1px solid rgba(0,0,0,0.1);"></div>
+        <span>Light Mode</span>
+      </button>
+      <button class="theme-btn" data-theme="amoled">
+        <div class="theme-circle" style="background:linear-gradient(135deg, #000000, #121212); border:1px solid rgba(255,255,255,0.2);"></div>
+        <span>AMOLED</span>
+      </button>
+      <button class="theme-btn" data-theme="cyber">
+        <div class="theme-circle" style="background:linear-gradient(135deg, #FACC15, #F43F5E);"></div>
+        <span>Cyberpunk</span>
+      </button>
+    </div>
+
+    <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#6B6B8A;margin-bottom:12px;border-bottom:1px solid var(--bdr);padding-bottom:6px;">ANIMATIONS</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;background:var(--card);padding:14px;border-radius:12px;border:1px solid var(--bdr);">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:2px;">Enable UI Animations</div>
+        <div style="font-size:10px;color:var(--dim);">Smooth transitions and hover effects</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="toggle-animations" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCREEN: SETTINGS - ABOUT -->
+<div class="screen" id="screen-settings-about" style="padding:0;min-height:300px;">
+  <div class="mgr-header" style="padding:12px; border-bottom:1px solid rgba(139,63,217,0.2); margin-bottom:0;">
+    <button class="mgr-back-btn" id="btn-back-settings-about">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    </button>
+    <span class="mgr-title">About Us</span>
+  </div>
+  <div style="padding:20px 16px;">
+    <!-- APP INFO SECTION -->
+    <div style="margin-bottom:20px; text-align:center;">
+      <div class="logo-wrap" style="width:52px;height:52px;margin:0 auto 12px;border-radius:14px;background:transparent;box-shadow:none;">
+        <img src="icons/icon128.png" style="width:100%;height:100%;border-radius:14px;object-fit:cover;">
+      </div>
+      <div style="font-size:17px;font-weight:900;color:#fff;letter-spacing:0.5px;">ZYLOS EXTENSION</div>
+      <div style="font-size:12px;color:var(--p2);margin-top:4px;font-weight:700;">Version 3.0.0</div>
+      <div style="font-size:11px;color:var(--dim);margin-top:10px;line-height:1.5;">
+        Universal Media Downloader bridging your browser to the powerful Zylos Desktop App.
+      </div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:12px;font-size:11px;color:var(--dim2);line-height:1.6;text-align:center;">
+      <div style="font-weight:700;color:var(--txt);margin-bottom:4px;">Built for speed and reliability.</div>
+      Support for over 1700+ sites powered by yt-dlp.
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: LOADING -->
+<div class="screen" id="screen-loading">
+  <div class="loading-body">
+    <div class="loader-ring">
+      <div class="loader-logo"><img src="icons/icon128.png" style="width:24px;height:24px;border-radius:6px;object-fit:cover;"></div>
+    </div>
+    <div id="loading-msg">Analyzing media...</div>
+    <div id="loading-sub"></div>
+    <button id="btn-retry-load">↺ Retry</button>
+  </div>
+  <div class="ftr"><div style="display:flex;align-items:center;gap:6px;"><span>ZYLOS v3.0</span><div class="ext-status-dot" style="width:8px;height:8px;border-radius:50%;background:#EF4444;box-shadow:0 0 8px rgba(239,68,68,0.5);" title="Checking connection..."></div></div><button class="open-app-btn">OPEN APP</button></div>
+</div>
+
+<!-- SCREEN: PLAYLIST PROMPT -->
+<div class="screen" id="screen-playlist">
+  <div class="pl-prompt-body">
+    <div class="pl-emoji">🎵</div>
+    <div class="pl-prompt-title">Playlist Detected</div>
+    <div class="pl-prompt-sub">Download just this video or open the full playlist in the desktop app for more control.</div>
+    <button class="pl-btn pl-btn-secondary" id="btn-pl-video">📺 Download This Video Only</button>
+    <button class="pl-btn pl-btn-ghost" id="btn-pl-full">Open Playlist in Desktop App</button>
+  </div>
+  <div class="ftr"><div style="display:flex;align-items:center;gap:6px;"><span>ZYLOS v3.0</span><div class="ext-status-dot" style="width:8px;height:8px;border-radius:50%;background:#EF4444;box-shadow:0 0 8px rgba(239,68,68,0.5);" title="Checking connection..."></div></div><button class="open-app-btn">OPEN APP</button></div>
+</div>
+
+<!-- SCREEN: INFO -->
+<div class="screen" id="screen-info">
+  <div class="vinfo">
+    <div class="vinfo-thumb-wrap">
+      <img id="thumb-img" style="display:none" alt="">
+      <div class="thumb-placeholder" id="thumb-placeholder">🎬</div>
+    </div>
+    <div class="vinfo-body">
+      <div id="video-title" class="vtitle">Loading...</div>
+      <div class="vmeta-row">
+        <div class="vmeta-chip" id="chip-duration"><span>⏱</span><span id="video-duration">--:--</span></div>
+        <div class="vmeta-chip accent">READY</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs" id="tab-switcher">
+    <div class="tab-slider"></div>
+    <div class="tab-item active" data-view="video"><span class="tab-item-icon">🎬</span>VIDEO</div>
+    <div class="tab-item" data-view="audio"><span class="tab-item-icon">🎵</span>AUDIO</div>
+  </div>
+
+  <div id="video-view" class="view-container active"><div class="quality-grid" id="video-grid"></div></div>
+  <div id="audio-view" class="view-container"><div class="quality-grid" id="audio-grid"></div></div>
+
+  <div class="ftr"><div style="display:flex;align-items:center;gap:6px;"><span>ZYLOS v3.0</span><div class="ext-status-dot" style="width:8px;height:8px;border-radius:50%;background:#EF4444;box-shadow:0 0 8px rgba(239,68,68,0.5);" title="Checking connection..."></div></div><button class="open-app-btn">OPEN APP</button></div>
+</div>
+
+<!-- SCREEN: DOWNLOADING -->
+<div class="screen" id="screen-downloading">
+  <div class="dl-card">
+    <div class="dl-thumb-wrap">
+      <img id="dl-thumb" style="display:none" alt="">
+      <div class="dl-thumb-overlay"></div>
+    </div>
+    <div class="dl-body">
+      <div class="dl-title-row">
+        <div id="dl-title">Downloading...</div>
+        <span class="dl-badge" id="dl-badge"></span>
+      </div>
+      <div id="dl-status">Starting...</div>
+      <div class="dl-bar-wrap"><div id="dl-bar-fill"></div></div>
+      <div class="dl-stats">
+        <div class="dl-pct-big" id="dl-pct">0%</div>
+        <div class="dl-info-col">
+          <div class="dl-speed-lbl" id="dl-speed"></div>
+          <div class="dl-eta-lbl" id="dl-eta"></div>
+          <div class="dl-bytes-lbl" id="dl-bytes"></div>
+        </div>
+      </div>
+      <div class="dl-actions">
+        <button id="btn-back-dl">⬅ Hide</button>
+        <button id="btn-cancel">✕ Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="ftr"><div style="display:flex;align-items:center;gap:6px;"><span>ZYLOS v3.0</span><div class="ext-status-dot" style="width:8px;height:8px;border-radius:50%;background:#EF4444;box-shadow:0 0 8px rgba(239,68,68,0.5);" title="Checking connection..."></div></div><button class="open-app-btn">OPEN APP</button></div>
+</div>
+
+<!-- SCREEN: DONE -->
+<div class="screen" id="screen-done">
+  <div class="done-card">
+    <div class="done-hero">
+      <div class="done-icon">✓</div>
+      <div class="done-head">
+        <h3>Download Complete!</h3>
+        <div id="done-title"></div>
+      </div>
+    </div>
+    <div class="done-meta">
+      <span id="done-type"></span>
+      <span id="done-filename"></span>
+      <span id="done-size"></span>
+    </div>
+    <div class="hdr-actions">
+    <button class="icon-btn" id="btn-theme-toggle" title="Toggle Theme">🌙</button>
+    <button class="icon-btn" id="btn-active-dl" title="Active Downloads">⬇<span id="badge-dl" style="display:none;">0</span></button>
+    <button class="open-app-btn" onclick="openApp()">APP</button>
+  </div>
+    <div class="done-actions">
+      <button class="act-btn primary" id="btn-open">▶ Open</button>
+      <button class="act-btn" id="btn-folder" style="border-color:rgba(42,171,238,.3);color:#2AABEE;background:rgba(42,171,238,.06);">📁 Folder</button>
+      <button class="act-btn" id="btn-copy">📋 Copy</button>
+    </div>
+    <div class="done-footer">
+      <button id="btn-download-more">↓ Download Another</button>
+    </div>
+  </div>
+  <input type="hidden" id="done-path-val">
+  <div class="ftr"><div style="display:flex;align-items:center;gap:6px;"><span>ZYLOS v3.0</span><div class="ext-status-dot" style="width:8px;height:8px;border-radius:50%;background:#EF4444;box-shadow:0 0 8px rgba(239,68,68,0.5);" title="Checking connection..."></div></div><button class="open-app-btn">OPEN APP</button></div>
+</div>
+
+<!-- SCREEN: ERROR -->
+<div class="screen" id="screen-error">
+  <div class="err-body">
+    <div class="err-icon-wrap">⚠️</div>
+    <div class="err-title">Download Failed</div>
+    <div id="error-msg"></div>
+    <button id="btn-retry-dl">↺ Try Again</button>
+  </div>
+  <div class="ftr"><div style="display:flex;align-items:center;gap:6px;"><span>ZYLOS v3.0</span><div class="ext-status-dot" style="width:8px;height:8px;border-radius:50%;background:#EF4444;box-shadow:0 0 8px rgba(239,68,68,0.5);" title="Checking connection..."></div></div><button class="open-app-btn">OPEN APP</button></div>
+</div>
+
+<!-- SCREEN: ALL DOWNLOADS -->
+<div class="screen" id="screen-all-downloads">
+  <div class="mgr-header">
+    <button class="mgr-back-btn" id="btn-back-mgr">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    </button>
+    <span class="mgr-title">Downloads Manager</span>
+    <button class="mgr-clear-btn" id="btn-clear-all" title="Clear Completed">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+    </button>
+  </div>
+  <div id="downloads-list"></div>
+  <div class="ftr"><div style="display:flex;align-items:center;gap:6px;"><span>ZYLOS v3.0</span><div class="ext-status-dot" style="width:8px;height:8px;border-radius:50%;background:#EF4444;box-shadow:0 0 8px rgba(239,68,68,0.5);" title="Checking connection..."></div></div><button class="open-app-btn">OPEN APP</button></div>
+</div>
+
+<!-- SCREEN: PLAYLIST ITEMS -->
+<div class="screen" id="screen-playlist-items">
+  <div class="pl-header">
+    <button id="btn-back-pl" style="background:transparent;border:none;color:rgba(255,255,255,.7);cursor:pointer;padding:4px;display:flex;align-items:center;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    </button>
+    <img id="pl-main-thumb" class="pl-thumb" src="" alt="">
+    <div class="pl-info">
+      <div id="pl-main-title" class="pl-title">Playlist</div>
+      <div id="pl-main-meta" class="pl-meta">0 videos</div>
+    </div>
+  </div>
+  <div class="pl-controls">
+    <div class="pl-sel-count"><span id="pl-selected-count">0</span> Selected</div>
+    <button class="pl-select-btn" id="btn-pl-select-all">Select All</button>
+  </div>
+  <div class="pl-list" id="pl-items-container"></div>
+  <div class="pl-footer">
+    <select id="pl-quality-sel" class="pl-quality-sel">
+      <option value="8K">8K · Video</option>
+      <option value="4K">4K · Video</option>
+      <option value="2K">2K · Video</option>
+      <option value="1440p">1440p · Video</option>
+      <option value="1080p" selected>1080p · Video</option>
+      <option value="720p">720p · Video</option>
+      <option value="480p">480p · Video</option>
+      <option value="360p">360p · Video</option>
+      <option value="240p">240p · Video</option>
+      <option value="144p">144p · Video</option>
+      <option value="MP3">MP3 · Audio (Best)</option>
+      <option value="MP3 320k">MP3 320k · Audio</option>
+      <option value="M4A">M4A · Audio</option>
+      <option value="WAV">WAV · Audio</option>
+      <option value="FLAC">FLAC · Audio</option>
+    </select>
+    <button class="pl-download-btn" id="btn-pl-download-sel" disabled>Download Selected</button>
+  </div>
+</div>
+
+<!-- MODAL: CONFIRM -->
+<div id="modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
+      <div class="modal-box">
+    <div class="modal-title" id="modal-title">Are you sure?</div>
+    <div class="modal-desc" id="modal-desc">Do you want to proceed?</div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" id="modal-btn-cancel">Cancel</button>
+      <button class="modal-btn modal-btn-confirm" id="modal-btn-confirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: VPN -->
+<div class="screen" id="screen-vpn" style="padding:0;min-height:480px;background:var(--bg2);">
+  <div class="mgr-header" style="padding:12px; border-bottom:1px solid rgba(139,63,217,0.2); margin-bottom:0;">
+    <button class="mgr-back-btn" id="btn-back-vpn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    </button>
+    <span class="mgr-title">VPN Proxy</span>
+    <button class="icon-btn" id="btn-open-desktop-vpn" style="margin-left:auto;" title="Open in Desktop App">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    </button>
+  </div>
+
+  <div style="padding:20px 16px; text-align:center; position:relative; overflow:hidden;">
+    <!-- IPs Row -->
+    <div style="display:flex; gap:10px; margin-bottom:40px; position:relative; z-index:2;">
+      <!-- Original IP -->
+      <div style="flex:1; background:var(--card); border:1px solid rgba(239,68,68,0.3); border-radius:12px; padding:12px; text-align:left; position:relative; transition:all 0.3s;" id="vpn-orig-card">
+        <div style="display:flex; align-items:center; gap:6px; font-size:10px; font-weight:700; color:var(--dim2); margin-bottom:8px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+          Original IP
+        </div>
+        <div id="vpn-orig-ip" style="font-size:13px; font-weight:800; color:#EF4444;">Fetching...</div>
+        <div id="vpn-orig-loc" style="font-size:10px; color:var(--dim); margin-top:2px;">--</div>
+      </div>
+      
+      <!-- Protected IP -->
+      <div style="flex:1; background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:12px; text-align:left; position:relative; transition:all 0.3s;" id="vpn-prot-card">
+        <div style="display:flex; align-items:center; gap:6px; font-size:10px; font-weight:700; color:var(--dim2); margin-bottom:8px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--dim2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="vpn-prot-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          Protected IP
+        </div>
+        <div id="vpn-prot-ip" style="font-size:13px; font-weight:800; color:var(--txt);">--</div>
+        <div id="vpn-prot-loc" style="font-size:10px; color:var(--dim); margin-top:2px;">--</div>
+      </div>
+    </div>
+    
+    <!-- Main Power Button -->
+    <div style="position:relative; width:110px; height:110px; margin:0 auto 20px;">
+      <style>
+        @keyframes vpn-spin { 100% { transform: rotate(360deg); } }
+        @keyframes vpn-ripple-anim {
+          0% { transform: scale(1); opacity: 0.6; border-width: 2px; }
+          100% { transform: scale(1.6); opacity: 0; border-width: 0px; }
+        }
+        
+        .vpn-ripple {
+          position: absolute; inset: 0; border-radius: 50%;
+          border: 2px solid #10B981;
+          opacity: 0; pointer-events: none;
+          box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+        .vpn-ripple.active { animation: vpn-ripple-anim 2s infinite cubic-bezier(0.1, 0.8, 0.3, 1); }
+        .vpn-ripple.active:nth-child(2) { animation-delay: 1s; }
+        
+        #vpn-main-btn {
+          width:100%; height:100%; border-radius:50%; background:var(--card); 
+          display:flex; align-items:center; justify-content:center; 
+          cursor:pointer; position:relative; z-index:10; 
+          box-shadow:0 10px 30px rgba(0,0,0,0.4);
+          border: none; overflow: hidden;
+          transform: scale(1); transition: transform 0.2s;
+        }
+        #vpn-main-btn:active { transform: scale(0.95); }
+        
+        /* Idle scanning border */
+        #vpn-main-btn::before {
+          content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+          background: conic-gradient(from 0deg, transparent 70%, rgba(139,63,217, 0.5) 100%);
+          animation: vpn-spin 4s linear infinite;
+          transition: opacity 0.5s;
+        }
+        
+        /* Inner fill */
+        #vpn-main-btn::after {
+          content: ''; position: absolute; inset: 3px;
+          background: var(--card); border-radius: 50%; z-index: 1;
+          transition: background 0.5s;
+        }
+        
+        /* SVG Icon styling */
+        #vpn-main-btn svg {
+          position: relative; z-index: 2;
+          color: var(--dim); transition: all 0.5s;
+        }
+        
+        /* Connected state */
+        #vpn-main-btn.connected {
+          box-shadow: 0 0 40px rgba(16, 185, 129, 0.3);
+        }
+        #vpn-main-btn.connected::before {
+          background: conic-gradient(from 0deg, transparent 50%, #10B981 100%);
+          animation: vpn-spin 2s linear infinite;
+        }
+        #vpn-main-btn.connected::after {
+          background: radial-gradient(circle at center, rgba(16, 185, 129, 0.2) 0%, var(--card) 80%);
+        }
+        #vpn-main-btn.connected svg {
+          color: #10B981;
+          filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.8));
+        }
+        
+        /* Connecting state */
+        #vpn-main-btn.connecting {
+          box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+        }
+        #vpn-main-btn.connecting::before {
+          background: conic-gradient(from 0deg, transparent 50%, #F59E0B 100%);
+          animation: vpn-spin 0.8s linear infinite;
+        }
+        #vpn-main-btn.connecting::after {
+          background: radial-gradient(circle at center, rgba(245, 158, 11, 0.2) 0%, var(--card) 80%);
+        }
+        #vpn-main-btn.connecting svg {
+          color: #F59E0B;
+          filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.8));
+        }
+      </style>
+      <div class="vpn-ripple" id="vpn-ripple-1"></div>
+      <div class="vpn-ripple" id="vpn-ripple-2"></div>
+      <button id="vpn-main-btn">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+      </button>
+    </div>
+    
+    <div id="vpn-status-text" style="font-size:16px; font-weight:800; color:var(--dim); margin-bottom:4px; letter-spacing:1px; transition:color 0.3s;">DISCONNECTED</div>
+    <div style="font-size:11px; color:var(--dim); margin-bottom:30px;" id="vpn-sub-text">Tap to connect</div>
+
+    <!-- Connection Mode Dropdown -->
+    <div style="background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:12px 14px; text-align:left; display:flex; align-items:center; justify-content:space-between; cursor:pointer; position:relative; transition:all 0.2s;" id="vpn-mode-selector">
+      <div style="display:flex; align-items:center; gap:12px;">
+         <div style="width:32px; height:32px; border-radius:10px; background:rgba(139,63,217,0.1); border:1px solid rgba(139,63,217,0.2); display:flex; align-items:center; justify-content:center; color:var(--p2);">
+           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+         </div>
+         <div>
+           <div style="font-size:12px; font-weight:700; color:var(--txt);">Connection Mode</div>
+           <div style="font-size:10px; color:var(--dim); margin-top:2px;" id="vpn-current-mode">Traffic only</div>
+         </div>
+      </div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dim2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      
+      <!-- Dropdown Menu -->
+      <div id="vpn-mode-dropdown" style="display:none; position:absolute; bottom:110%; left:0; right:0; background:var(--card2); border:1px solid var(--bdr); border-radius:12px; padding:6px; box-shadow:0 10px 40px rgba(0,0,0,0.6); z-index:100;">
+        <style>
+          .vpn-mode-item {
+            padding:10px 12px; font-size:11px; font-weight:600; color:var(--dim2);
+            border-radius:8px; transition:all 0.2s; cursor:pointer;
+          }
+          .vpn-mode-item:hover {
+            background:rgba(255,255,255,0.05); color:#fff;
+          }
+          .vpn-mode-item.active {
+            background:rgba(139,63,217,0.15); color:var(--p2);
+          }
+        </style>
+        <div class="vpn-mode-item">Local proxy</div>
+        <div class="vpn-mode-item">Traffic and DNS (UDP)</div>
+        <div class="vpn-mode-item">DNS only (HTTPS)</div>
+        <div class="vpn-mode-item">DNS only (TLS)</div>
+        <div class="vpn-mode-item">Traffic and DNS (HTTPS)</div>
+        <div class="vpn-mode-item">Traffic and DNS (TLS)</div>
+        <div class="vpn-mode-item active">Traffic only</div>
+      </div>
+    </div>
+    
+    <div id="vpn-error-text" style="font-size:11px;color:#EF4444;height:14px;font-weight:600;margin-top:12px;"></div>
+  </div>
+</div>
+
+<!-- SCREEN: SPEED TESTER -->
+<div class="screen" id="screen-speed" style="padding:0;min-height:400px;background:var(--bg2);">
+  <div class="mgr-header" style="padding:12px; border-bottom:1px solid rgba(139,63,217,0.2); margin-bottom:0;">
+    <button class="mgr-back-btn" id="btn-back-speed">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    </button>
+    <span class="mgr-title">Speed Tester</span>
+    <button class="icon-btn" id="btn-open-desktop-speed" style="margin-left:auto;" title="Open in Desktop App">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    </button>
+  </div>
+  <div style="padding:24px 20px; text-align:center;">
+    <div style="position:relative;width:220px;height:220px;margin:0 auto 30px;">
+      <!-- Background Glow -->
+      <div id="speed-glow-bg" style="position:absolute;inset:20px;background:linear-gradient(135deg, #3B82F6, #EC4899);border-radius:50%;filter:blur(40px);opacity:0.1;transition:opacity 0.3s;"></div>
+      
+      <svg width="220" height="220" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="speedGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#3B82F6" />
+            <stop offset="50%" stop-color="#8B3FD9" />
+            <stop offset="100%" stop-color="#EC4899" />
+          </linearGradient>
+          <linearGradient id="trackGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="rgba(59,130,246,0.15)" />
+            <stop offset="50%" stop-color="rgba(139,63,217,0.15)" />
+            <stop offset="100%" stop-color="rgba(236,72,153,0.15)" />
+          </linearGradient>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+        
+        <!-- Ticks -->
+        <circle cx="50" cy="50" r="39" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" stroke-dasharray="1 6" transform="rotate(135 50 50)" stroke-dashoffset="-70"></circle>
+        
+        <!-- Base Track -->
+        <path d="M 18.18 81.82 A 45 45 0 1 1 81.82 81.82" fill="none" stroke="url(#trackGrad)" stroke-width="7" stroke-linecap="round" />
+        
+        <!-- Active Fill -->
+        <path id="speed-ring-fill" d="M 18.18 81.82 A 45 45 0 1 1 81.82 81.82" fill="none" stroke="url(#speedGrad)" stroke-width="7" stroke-linecap="round" filter="url(#glow)" stroke-dasharray="212.05 212.05" stroke-dashoffset="212.05" style="transition:stroke-dashoffset 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);" />
+      </svg>
+      
+      <!-- Needle -->
+      <div id="speed-needle-container" style="position:absolute;inset:0;transform:rotate(-135deg);transition:transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+        <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);width:12px;height:12px;background:#fff;border-radius:50%;box-shadow:0 0 15px #fff, 0 0 30px var(--pk);border:2px solid var(--p);"></div>
+      </div>
+
+      <!-- Center Info -->
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:15px;">
+        <div id="speed-phase" style="font-size:11px;font-weight:900;color:var(--dim);letter-spacing:2px;margin-bottom:4px;text-transform:uppercase;">READY</div>
+        <div style="display:flex;align-items:baseline;gap:2px;">
+          <div id="speed-value" style="font-size:46px;font-weight:900;color:var(--txt);line-height:1;text-shadow:0 2px 15px rgba(255,255,255,0.15);">0</div>
+        </div>
+        <div style="font-size:12px;font-weight:800;color:var(--dim2);margin-top:4px;">Mbps</div>
+      </div>
+    </div>
+    
+    <div style="display:flex;gap:12px;margin-bottom:24px;">
+      <div style="flex:1;background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:12px 8px;">
+        <div style="font-size:9px;color:var(--dim);font-weight:700;margin-bottom:4px;">PING</div>
+        <div style="font-size:14px;font-weight:800;color:var(--txt);"><span id="speed-ping">--</span> <span style="font-size:9px;color:var(--dim2);">ms</span></div>
+      </div>
+      <div style="flex:1;background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:12px 8px;">
+        <div style="font-size:9px;color:var(--dim);font-weight:700;margin-bottom:4px;">DOWNLOAD</div>
+        <div style="font-size:14px;font-weight:800;color:#3B82F6;"><span id="speed-down">--</span> <span style="font-size:9px;color:var(--dim2);">Mbps</span></div>
+      </div>
+      <div style="flex:1;background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:12px 8px;">
+        <div style="font-size:9px;color:var(--dim);font-weight:700;margin-bottom:4px;">UPLOAD</div>
+        <div style="font-size:14px;font-weight:800;color:#10B981;"><span id="speed-up">--</span> <span style="font-size:9px;color:var(--dim2);">Mbps</span></div>
+      </div>
+    </div>
+    
+    <button id="btn-start-speedtest" style="width:100%;background:linear-gradient(135deg,#8B3FD9,#EC4899);border:none;color:#fff;padding:14px;border-radius:14px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(236,72,153,0.3);transition:all 0.2s;font-family:inherit;">START SPEED TEST</button>
+    
+    <!-- Test Summary (Hidden by default) -->
+    <div id="speed-summary" style="display:none;margin-top:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:16px;text-align:left;">
+      <div style="font-size:12px;font-weight:800;color:var(--txt);margin-bottom:16px;display:flex;align-items:center;gap:6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+        TEST SUMMARY
+      </div>
+      
+      <!-- IP Info -->
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div style="display:flex;justify-content:space-between;font-size:11px;">
+          <span style="color:var(--dim);">IP Address</span>
+          <span id="speed-sum-ip" style="color:var(--p2);font-weight:700;">--</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;">
+          <span style="color:var(--dim);">Location</span>
+          <span id="speed-sum-loc" style="color:var(--p2);font-weight:700;">--</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;">
+          <span style="color:var(--dim);">ISP / Network</span>
+          <span id="speed-sum-isp" style="color:var(--p2);font-weight:700;max-width:140px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">--</span>
+        </div>
+      </div>
+      
+      <!-- Compatibility -->
+      <div style="font-size:10px;font-weight:800;color:var(--dim);margin-bottom:12px;letter-spacing:1px;">COMPATIBILITY</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;">
+          <div style="display:flex;flex-direction:column;">
+            <span style="color:var(--txt);font-weight:600;">HD Video Streaming</span>
+            <span style="font-size:9px;color:var(--dim);">Requires 5 Mbps</span>
+          </div>
+          <span id="speed-compat-hd" style="font-weight:700;">--</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;">
+          <div style="display:flex;flex-direction:column;">
+            <span style="color:var(--txt);font-weight:600;">4K / HDR Streaming</span>
+            <span style="font-size:9px;color:var(--dim);">Requires 25 Mbps</span>
+          </div>
+          <span id="speed-compat-4k" style="font-weight:700;">--</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;">
+          <div style="display:flex;flex-direction:column;">
+            <span style="color:var(--txt);font-weight:600;">Cloud Gaming</span>
+            <span style="font-size:9px;color:var(--dim);">Requires 50 Mbps</span>
+          </div>
+          <span id="speed-compat-game" style="font-weight:700;">--</span>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- MODAL: CONFIRM -->
+<div id="modal-overlay" class="zylos-dialog">
+  <div class="modal-box">
+    <div class="modal-title" id="modal-title">Confirm</div>
+    <div class="modal-desc" id="modal-desc"></div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" id="modal-btn-cancel">Cancel</button>
+      <button class="modal-btn modal-btn-confirm" id="modal-btn-confirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
