@@ -53,3 +53,17 @@ key.pem
 *.exe
 build_old/
 yt_downloader.iml
+
+# Unwanted files and scripts
+installer.iss
+OfflineInstaller.iss
+plan.md
+run.ps1
+run_analyze.dart
+scratch_test.dart
+test_api.dart
+test_api_2.dart
+test_yt.dart
+Logo/
+Logos and icons/
+

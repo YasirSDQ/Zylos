@@ -12,13 +12,13 @@ Zylos is a versatile and powerful desktop application built with Flutter, design
 
 ## 📸 Screenshots
 
-> *Add your screenshots here!*
+| Home | Library |
+| :---: | :---: |
+| ![Home](docs/screenshots/home.png) | ![Library](docs/screenshots/library.png) |
 
-| Home Dashboard | Settings | Plugin Manager |
-| --- | --- | --- |
-| ![Home](docs/screenshots/home.png) | ![Settings](docs/screenshots/settings.png) | ![Plugins](docs/screenshots/plugins.png) |
-
-*(Replace the placeholder links above with actual screenshot paths once captured.)*
+| Speed Test | Settings |
+| :---: | :---: |
+| ![Speed Test](docs/screenshots/speed.png) | ![Settings](docs/screenshots/settings.png) |
 
 ## 📦 Installation
 
