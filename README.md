@@ -494,7 +494,8 @@ For a complete list of supported sites, see [supportedsites.md](supportedsites.m
 
 <div align="center">
 
-![Supported Sites](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Main%20Interface.png)
+![Supported Sites](
+https://raw.githubusercontent.com/YasirSDQ/Zylos/refs/heads/main/Images/Screenshots/SupportedSites.jpg)
 
 *Browse through thousands of supported sites*
 
