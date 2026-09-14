@@ -6,7 +6,7 @@
 
 **A powerful, cross-platform media downloading solution built with Flutter**
 
-[![Release](https://img.shields.io/github/v/release/yourusername/zylos?label=version&color=blue)](https://github.com/yourusername/zylos/releases)
+[![Release](https://img.shields.io/github/v/release/YasirSDQ/Zylos?label=version&color=blue)](https://github.com/YasirSDQ/Zylos/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Android-lightgrey)](#)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
@@ -81,10 +81,9 @@ Zylos is a versatile and powerful desktop application built with Flutter, design
 
 <div align="center">
 
-| Home Screen | Navigation |
-| :---: | :---: |
-| ![Home Screen](docs/screenshots/home_screen.png) | ![Navigation](docs/screenshots/navigation.png) |
-| *Main dashboard with quick actions* | *Easy navigation between features* |
+![Main Interface](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Main%20Interface.png)
+
+*Main dashboard with quick actions and easy navigation*
 
 </div>
 
@@ -94,20 +93,9 @@ Zylos is a versatile and powerful desktop application built with Flutter, design
 
 <div align="center">
 
-| Universal Downloader | Video Info Preview |
-| :---: | :---: |
-| ![Universal Downloader](docs/screenshots/universal_downloader.png) | ![Video Info](docs/screenshots/video_info.png) |
-| *Paste any URL to start downloading* | *Preview video details before download* |
+![Download Features](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Download%20Features.png)
 
-| Quality Selection | Download Queue |
-| :---: | :---: |
-| ![Quality Selection](docs/screenshots/quality_selector.png) | ![Download Queue](docs/screenshots/download_queue.png) |
-| *Choose your preferred quality* | *Manage multiple downloads* |
-
-| Playlist Download | Progress Tracking |
-| :---: | :---: |
-| ![Playlist](docs/screenshots/playlist_download.png) | ![Progress](docs/screenshots/progress_tracking.png) |
-| *Download entire playlists* | *Real-time progress monitoring* |
+*Universal downloader with quality selection, playlist support, and real-time progress tracking*
 
 </div>
 
@@ -117,15 +105,9 @@ Zylos is a versatile and powerful desktop application built with Flutter, design
 
 <div align="center">
 
-| Media Converter | Bulk Converter |
-| :---: | :---: |
-| ![Converter](docs/screenshots/converter.png) | ![Bulk Converter](docs/screenshots/bulk_converter.png) |
-| *Convert between formats* | *Batch conversion support* |
+![Tools and Utilities](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Tools%20and%20Utailites.jfif)
 
-| Speed Test | VPN/WARP Status |
-| :---: | :---: |
-| ![Speed Test](docs/screenshots/speed_test.png) | ![VPN Status](docs/screenshots/vpn_status.png) |
-| *Test your connection speed* | *Secure browsing enabled* |
+*Media converter, bulk conversion, speed test, and VPN/WARP status*
 
 </div>
 
@@ -135,15 +117,9 @@ Zylos is a versatile and powerful desktop application built with Flutter, design
 
 <div align="center">
 
-| Plugin Manager | Download History |
-| :---: | :---: |
-| ![Plugin Manager](docs/screenshots/plugin_manager.png) | ![History](docs/screenshots/history.png) |
-| *Install and manage plugins* | *View past downloads* |
+![Management & Settings](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Management%20&%20Settings.jfif)
 
-| Settings Panel | Supported Sites |
-| :---: | :---: |
-| ![Settings](docs/screenshots/settings.png) | ![Supported Sites](docs/screenshots/supported_sites.png) |
-| *Customize your experience* | *Browse 1000+ supported sites* |
+*Plugin manager, download history, settings panel, and supported sites browser*
 
 </div>
 
@@ -153,15 +129,9 @@ Zylos is a versatile and powerful desktop application built with Flutter, design
 
 <div align="center">
 
-| Welcome Screen | Installation Mode |
-| :---: | :---: |
-| ![Installer Welcome](docs/screenshots/installer_welcome.png) | ![Install Mode](docs/screenshots/installer_mode.png) |
-| *Start the installation* | *Choose Online or Offline mode* |
+![Installation Wizard](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Installation%20Wizard.jfif)
 
-| Plugin Selection | Installation Complete |
-| :---: | :---: |
-| ![Plugin Selection](docs/screenshots/plugin_selection.png) | ![Complete](docs/screenshots/installer_complete.png) |
-| *Select desired plugins* | *Ready to use!* |
+*Step-by-step installation process with Online/Offline mode selection*
 
 </div>
 
@@ -171,10 +141,9 @@ Zylos is a versatile and powerful desktop application built with Flutter, design
 
 <div align="center">
 
-| Extension Popup | Integration |
-| :---: | :---: |
-| ![Extension Popup](docs/screenshots/extension_popup.png) | ![Browser Integration](docs/screenshots/browser_integration.png) |
-| *Quick access from browser* | *Seamless workflow* |
+![Browser Extension](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Browser%20Extension.jpg)
+
+*Quick access from browser with seamless workflow integration*
 
 </div>
 
@@ -194,9 +163,15 @@ Zylos is a versatile and powerful desktop application built with Flutter, design
 
 #### Method 1: Universal Installer (Recommended)
 
-1. Download the latest `Zylos_Universal_Setup.exe` from the [Releases](https://github.com/yourusername/zylos/releases) page
+1. Download the latest **Zylos v3.0** release:
+   
+   | Installer Type | Description | Download |
+   | :--- | :--- | :--- |
+   | **Universal Setup** | Complete installer with all components | [⬇️ Download](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/Zylos_Universal_Setup.exe) |
+   | **Online Setup** | Lightweight installer (downloads components during install) | [⬇️ Download](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/Zylos_Online_Setup.exe) |
+   | **Offline Setup** | Standalone installer (no internet required) | [⬇️ Download](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/Zylos_Offline_Setup.exe) |
 
-2. Run the installer
+2. Run the downloaded installer
 
 3. Choose your installation mode:
    - **🌐 Online Installation**: Fetches the latest versions of yt-dlp, FFmpeg, and WARP (requires internet)
@@ -215,9 +190,9 @@ Zylos is a versatile and powerful desktop application built with Flutter, design
 
 <div align="center">
 
-![Installation Steps](docs/screenshots/installation_steps.png)
+[📥 View Release v3.0 on GitHub](https://github.com/YasirSDQ/Zylos/releases/tag/Zylos_v3.0)
 
-*Step-by-step installation process*
+*Step-by-step installation process with three installer options*
 
 </div>
 
@@ -235,7 +210,7 @@ Upon first launch, Zylos will:
 
 <div align="center">
 
-![First Run](docs/screenshots/first_run.png)
+![First Run](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Installation%20Wizard.jfif)
 
 *Initial setup wizard*
 
@@ -263,7 +238,7 @@ Upon first launch, Zylos will:
 
 <div align="center">
 
-![Quick Start Guide](docs/screenshots/quick_start_guide.png)
+![Quick Start Guide](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Download%20Features.png)
 
 *Download your first video in 6 easy steps*
 
@@ -375,8 +350,8 @@ dev_dependencies:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/zylos.git
-cd zylos
+git clone https://github.com/YasirSDQ/Zylos.git
+cd Zylos
 
 # Get dependencies
 flutter pub get
@@ -418,7 +393,7 @@ flutter build appbundle --release
 
 <div align="center">
 
-![Inno Setup](docs/screenshots/inno_setup.png)
+![Inno Setup](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Installation%20Wizard.jfif)
 
 *Building the installer with Inno Setup*
 
@@ -497,7 +472,7 @@ For a complete list of supported sites, see [supportedsites.md](supportedsites.m
 
 <div align="center">
 
-![Supported Sites](docs/screenshots/supported_sites_list.png)
+![Supported Sites](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Main%20Interface.png)
 
 *Browse through thousands of supported sites*
 
@@ -554,7 +529,7 @@ cd "C:\Program Files\Zylos\zylos_extension"
 
 <div align="center">
 
-![Browser Extension Demo](docs/screenshots/browser_extension_demo.png)
+![Browser Extension Demo](https://raw.githubusercontent.com/YasirSDQ/Zylos/5023f01d092535641c9ab54f9329ead0fe08152b/Images/Screenshots/Browser%20Extension.jpg)
 
 *Seamless browser integration*
 
@@ -616,7 +591,7 @@ A: Yes, Zylos supports resuming interrupted downloads automatically.
 
 </div>
 
-For more help, please [open an issue](https://github.com/yourusername/zylos/issues) on GitHub.
+For more help, please [open an issue](https://github.com/YasirSDQ/Zylos/issues) on GitHub.
 
 ---
 
@@ -735,8 +710,8 @@ Zylos wouldn't be possible without these amazing projects:
 
 ## 📞 Support
 
-- **GitHub Issues**: [Report bugs & request features](https://github.com/yourusername/zylos/issues)
-- **Discussions**: [Community forum](https://github.com/yourusername/zylos/discussions)
+- **GitHub Issues**: [Report bugs & request features](https://github.com/YasirSDQ/Zylos/issues)
+- **Discussions**: [Community forum](https://github.com/YasirSDQ/Zylos/discussions)
 - **Email**: support@zylos.app (placeholder)
 
 ---
@@ -747,8 +722,8 @@ Zylos wouldn't be possible without these amazing projects:
 
 ⭐ Star this repo if you find it helpful!
 
-![Stars](https://img.shields.io/github/stars/yourusername/zylos?style=social)
-![Forks](https://img.shields.io/github/forks/yourusername/zylos?style=social)
-![Watchers](https://img.shields.io/github/watchers/yourusername/zylos?style=social)
+![Stars](https://img.shields.io/github/stars/YasirSDQ/Zylos?style=social)
+![Forks](https://img.shields.io/github/forks/YasirSDQ/Zylos?style=social)
+![Watchers](https://img.shields.io/github/watchers/YasirSDQ/Zylos?style=social)
 
 </div>
