@@ -14,23 +14,6 @@
 
 ---
 
-## 📖 Table of Contents
-
-- [About](#about)
-- [Features](#-features)
-- [Screenshots](#-screenshots)
-- [Installation](#-installation)
-- [Usage Guide](#-usage-guide)
-- [Tech Stack](#-tech-stack)
-- [Development](#-development)
-- [Supported Sites](#-supported-sites)
-- [Browser Extension](#-browser-extension)
-- [FAQ](#-faq)
-- [Contributing](#-contributing)
-- [License](#-license)
-
----
-
 <div align="center">
 
 # 🚀 Download Zylos v3.0
@@ -47,6 +30,25 @@
 > - **Browser Extension**: Enhances downloading directly from your browser.
 
 </div>
+
+
+---
+
+## 📖 Table of Contents
+
+- [About](#about)
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Installation](#-installation)
+- [Usage Guide](#-usage-guide)
+- [Tech Stack](#-tech-stack)
+- [Development](#-development)
+- [Supported Sites](#-supported-sites)
+- [Browser Extension](#-browser-extension)
+- [FAQ](#-faq)
+- [Contributing](#-contributing)
+- [License](#-license)
+
 
 ---
 
