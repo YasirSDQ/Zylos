@@ -20,8 +20,6 @@
 > - **Offline Setup**: Best for installing on multiple PCs without internet.
 > - **Browser Extension**: Enhances downloading directly from your browser.
 
-</div>
-
 
 
 
