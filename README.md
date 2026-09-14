@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Zylos Logo](assets/images/logo.png)
+![Zylos Logo](Images/Screenshots/Feautre Image.jfif)
 
 **A powerful, cross-platform media downloading solution built with Flutter**
 
