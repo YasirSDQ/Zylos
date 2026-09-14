@@ -493,19 +493,24 @@ Zylos includes a browser extension for Chrome, Edge, and Firefox that enhances t
 
 ### Installation
 
+#### Download Extension (v3.0)
+
+Download the latest extension package: **[zylos_extension_3.0.zip](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/zylos_extension_3.0.zip)**
+
 #### Manual Installation
 
-1. Open your browser's extension management page
+1. Download and extract the `zylos_extension_3.0.zip` file
+2. Open your browser's extension management page
    - Chrome/Edge: `chrome://extensions/`
    - Firefox: `about:addons`
 
-2. Enable "Developer Mode"
+3. Enable "Developer Mode"
 
-3. Click "Load unpacked"
+4. Click "Load unpacked"
 
-4. Navigate to the `zylos_extension` folder in the Zylos installation directory
+5. Navigate to the extracted `zylos_extension` folder
 
-5. The extension will be installed
+6. The extension will be installed
 
 #### PowerShell Script (Windows)
 
