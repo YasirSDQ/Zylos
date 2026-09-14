@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Zylos Logo]([����](https://raw.githubusercontent.com/YasirSDQ/Zylos/refs/heads/main/Images/Screenshots/Feautre%20Image.jfif))
+![Zylos Logo](https://raw.githubusercontent.com/YasirSDQ/Zylos/refs/heads/main/Images/Screenshots/Feautre%20Image.jfif)
 
 **A powerful, cross-platform media downloading solution built with Flutter**
 
