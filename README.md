@@ -16,7 +16,7 @@
 
 <div align="center">
 
-# 🚀 Download Zylos v3.0
+## 🚀 Download Zylos v3.0
 
 [![Universal Setup](https://img.shields.io/badge/Download-Universal_Setup-blue?style=for-the-badge&logo=windows)](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/Zylos_Universal_Setup.exe)
 [![Online Setup](https://img.shields.io/badge/Download-Online_Setup-green?style=for-the-badge&logo=download)](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/Zylos_Online_Setup.exe)
@@ -34,6 +34,8 @@
 
 ---
 
+## 📝 About
+=======
 ## 📖 Table of Contents
 
 - [About](#about)
