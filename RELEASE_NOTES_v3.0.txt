@@ -1,0 +1,88 @@
+================================================================================
+                         ZYLOS v3.0 RELEASE NOTES
+================================================================================
+
+Welcome to Zylos v3.0! A versatile and powerful desktop application built with 
+Flutter, designed to offer an extensive set of tools via modular plugins.
+
+--------------------------------------------------------------------------------
+DOWNLOAD ASSETS
+--------------------------------------------------------------------------------
+
+DESKTOP INSTALLERS:
+-------------------
+1. Zylos_Universal_Setup.exe (Recommended)
+   Size: ~158 MB
+   Description: Hybrid Universal Installer giving choice between Online and 
+   Offline modes during setup.
+   Best For: Users wanting flexibility or admins deploying to mixed environments.
+
+2. Zylos_Online_Setup.exe
+   Size: ~13 MB
+   Description: Lightweight installer fetching latest plugins during setup.
+   Best For: Users with fast internet wanting the absolute latest plugins.
+
+3. Zylos_Offline_Setup.exe
+   Size: ~158 MB
+   Description: Fully self-contained installer with all essential plugins.
+   Best For: Restricted internet environments or one-and-done setup.
+
+BROWSER EXTENSION:
+------------------
+File: zylos_extension_3.0.zip
+Size: 562 KB
+Compatibility: Chrome, Edge, Firefox, Brave
+Features: Detects playable media, adds "Download with Zylos" button.
+Installation: 
+  1. Download and extract the ZIP file.
+  2. Open browser extensions page (chrome://extensions, edge://extensions, etc.).
+  3. Enable "Developer Mode".
+  4. Click "Load Unpacked" and select the extracted folder.
+
+--------------------------------------------------------------------------------
+KEY FEATURES & OPTIONS
+--------------------------------------------------------------------------------
+
+ADVANCED PLUGIN MANAGEMENT:
+- Integrated Downloader: Powered by yt-dlp (Stable, Nightly, Master builds).
+- Media Conversion: Seamless FFmpeg integration for format conversions.
+- Browser Extension: Seamless link capturing from web browsers.
+
+SECURE & PRIVATE:
+- Built-in Cloudflare WARP: Secure private network traffic to bypass throttling 
+  or geographic restrictions.
+
+CUSTOMIZABLE EXPERIENCE:
+- Auto Startup: Configure Zylos to run automatically on system boot.
+- Modular Design: Select specific plugins during installation.
+
+--------------------------------------------------------------------------------
+INSTALLATION INSTRUCTIONS
+--------------------------------------------------------------------------------
+
+1. Download the installer that best fits your needs (see Assets above).
+2. Run the executable (.exe).
+3. If using Universal Setup, choose Online or Offline mode.
+4. Select the plugins you wish to install.
+5. Follow on-screen instructions to complete setup.
+
+NOTE: If unsure, we recommend Zylos_Universal_Setup.exe for maximum flexibility.
+
+--------------------------------------------------------------------------------
+TECHNOLOGY STACK
+--------------------------------------------------------------------------------
+- UI Framework: Flutter (https://flutter.dev/)
+- Download Engine: yt-dlp (https://github.com/yt-dlp/yt-dlp)
+- Media Processing: FFmpeg (https://github.com/yt-dlp/FFmpeg-Builds)
+
+--------------------------------------------------------------------------------
+LINKS
+--------------------------------------------------------------------------------
+GitHub Repository: https://github.com/YasirSDQ/Zylos
+Issue Tracker:     https://github.com/YasirSDQ/Zylos/issues
+Documentation:     https://github.com/YasirSDQ/Zylos/wiki
+
+================================================================================
+Built with yt-dlp, FFmpeg, and Flutter
+Copyright (c) 2024 YasirSDQ. Released under MIT License.
+================================================================================
