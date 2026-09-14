@@ -4,6 +4,8 @@
 
 ![Zylos Logo](https://raw.githubusercontent.com/YasirSDQ/Zylos/refs/heads/main/Images/Screenshots/Feautre%20Image.jfif)
 
+---
+
 <div align="center">
 
 # 🚀 Download Zylos v3.0
