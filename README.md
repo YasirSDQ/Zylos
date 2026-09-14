@@ -1,13 +1,21 @@
 # Zylos 🚀 - Advanced Media Downloader & Manager
 
+<div align="center">
 
 ![Zylos Logo](https://raw.githubusercontent.com/YasirSDQ/Zylos/refs/heads/main/Images/Screenshots/Feautre%20Image.jfif)
 
+**A powerful, cross-platform media downloading solution built with Flutter**
+
+[![Release](https://img.shields.io/github/v/release/YasirSDQ/Zylos?label=version&color=blue)](https://github.com/YasirSDQ/Zylos/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Android-lightgrey)](#)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+</div>
+
 ---
-###
 
 <div align="center">
-   
+
 # 🚀 Download Zylos v3.0
 
 [![Universal Setup](https://img.shields.io/badge/Download-Universal_Setup-blue?style=for-the-badge&logo=windows)](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/Zylos_Universal_Setup.exe)
@@ -21,8 +29,8 @@
 > - **Offline Setup**: Best for installing on multiple PCs without internet.
 > - **Browser Extension**: Enhances downloading directly from your browser.
 
+</div>
 
-##
 
 ---
 
