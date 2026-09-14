@@ -4,15 +4,7 @@
 
 ![Zylos Logo](https://raw.githubusercontent.com/YasirSDQ/Zylos/refs/heads/main/Images/Screenshots/Feautre%20Image.jfif)
 
-**A powerful, cross-platform media downloading solution built with Flutter**
 
-[![Release](https://img.shields.io/github/v/release/YasirSDQ/Zylos?label=version&color=blue)](https://github.com/YasirSDQ/Zylos/releases)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Android-lightgrey)](#)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-
-</div>
-
----
 
 <div align="center">
 
@@ -33,6 +25,16 @@
 
 
 ---
+**A powerful, cross-platform media downloading solution built with Flutter**
+
+[![Release](https://img.shields.io/github/v/release/YasirSDQ/Zylos?label=version&color=blue)](https://github.com/YasirSDQ/Zylos/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Android-lightgrey)](#)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+</div>
+
+---
+
 
 ## 📖 Table of Contents
 
