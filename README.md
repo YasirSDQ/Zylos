@@ -712,13 +712,13 @@ Zylos wouldn't be possible without these amazing projects:
 
 - **GitHub Issues**: [Report bugs & request features](https://github.com/YasirSDQ/Zylos/issues)
 - **Discussions**: [Community forum](https://github.com/YasirSDQ/Zylos/discussions)
-- **Email**: support@zylos.app (placeholder)
+- **Email**: yasirsdq2@gmail.com (placeholder)
 
 ---
 
 <div align="center">
 
-**Made with ❤️ using Flutter**
+**Made with ❤️ By Yasir Siddiqui**
 
 ⭐ Star this repo if you find it helpful!
 
