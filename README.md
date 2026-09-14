@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Zylos Logo](assets/images/logo.png)
+![Zylos Logo](https://raw.githubusercontent.com/YasirSDQ/Zylos/refs/heads/main/Images/Screenshots/Feautre%20Image.jfif)
 
 **A powerful, cross-platform media downloading solution built with Flutter**
 
@@ -11,23 +11,6 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 </div>
-
----
-
-## 📖 Table of Contents
-
-- [About](#about)
-- [Features](#-features)
-- [Screenshots](#-screenshots)
-- [Installation](#-installation)
-- [Usage Guide](#-usage-guide)
-- [Tech Stack](#-tech-stack)
-- [Development](#-development)
-- [Supported Sites](#-supported-sites)
-- [Browser Extension](#-browser-extension)
-- [FAQ](#-faq)
-- [Contributing](#-contributing)
-- [License](#-license)
 
 ---
 
@@ -48,9 +31,31 @@
 
 </div>
 
+
 ---
 
 ## 📝 About
+=======
+## 📖 Table of Contents
+
+- [About](#about)
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Installation](#-installation)
+- [Usage Guide](#-usage-guide)
+- [Tech Stack](#-tech-stack)
+- [Development](#-development)
+- [Supported Sites](#-supported-sites)
+- [Browser Extension](#-browser-extension)
+- [FAQ](#-faq)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+
+---
+<div
+   
+## About
 
 Zylos is a versatile and powerful desktop application built with Flutter, designed to offer an extensive set of tools via modular plugins. With an advanced, unified installer, Zylos provides users the flexibility of both full offline installations (pre-packaged with essential plugins) and online installations (downloading the latest plugins on the fly).
 
@@ -736,13 +741,13 @@ Zylos wouldn't be possible without these amazing projects:
 
 - **GitHub Issues**: [Report bugs & request features](https://github.com/YasirSDQ/Zylos/issues)
 - **Discussions**: [Community forum](https://github.com/YasirSDQ/Zylos/discussions)
-- **Email**: support@zylos.app (placeholder)
+- **Email**: yasirsdq2@gmail.com (placeholder)
 
 ---
 
 <div align="center">
 
-**Made with ❤️ using Flutter**
+**Made with ❤️ By Yasir Siddiqui**
 
 ⭐ Star this repo if you find it helpful!
 
