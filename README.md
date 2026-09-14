@@ -5,7 +5,6 @@
 
 ---
 
-<div align="center">
 
 # 🚀 Download Zylos v3.0
 
