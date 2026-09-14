@@ -1,69 +1,59 @@
-# Miscellaneous
-*.class
+```
+# Logs and temp files
 *.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
 
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg-info/
+.eggs/
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
-/coverage/
+# Dependencies
+node_modules/
+venv/
+.venv/
+.env/
+lib/
+share/
+bin/
 
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-/Output/
-.metadata
-analyze.json
-ffmpeg_latest.json
-key.pem
-*.crx
+# Build artifacts
+dist/
+build/
+*.egg
+*.whl
 *.zip
-*.exe
-build_old/
-yt_downloader.iml
+*.tar.gz
+*.tar.bz2
+*.tar.xz
 
-# Unwanted files and scripts
-installer.iss
-OfflineInstaller.iss
-plan.md
-run.ps1
-run_analyze.dart
-scratch_test.dart
-test_api.dart
-test_api_2.dart
-test_yt.dart
-Logo/
-Logos and icons/
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
 
+# Coverage reports
+.coverage
+htmlcov/
+.coverage.*
+.nox/
+.tox/
+
+# IDE specific
+*.swp
+*.swo
+*~
+```
