@@ -31,6 +31,25 @@
 
 ---
 
+<div align="center">
+
+# 🚀 Download Zylos v3.0
+
+[![Universal Setup](https://img.shields.io/badge/Download-Universal_Setup-blue?style=for-the-badge&logo=windows)](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/Zylos_Universal_Setup.exe)
+[![Online Setup](https://img.shields.io/badge/Download-Online_Setup-green?style=for-the-badge&logo=download)](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/Zylos_Online_Setup.exe)
+[![Offline Setup](https://img.shields.io/badge/Download-Offline_Setup-orange?style=for-the-badge&logo=package)](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/Zylos_Offline_Setup.exe)
+[![Browser Extension](https://img.shields.io/badge/Get-Browser_Extension-purple?style=for-the-badge&logo=google-chrome)](https://github.com/YasirSDQ/Zylos/releases/download/Zylos_v3.0/zylos_extension_3.0.zip)
+
+> **💡 Quick Tip:** 
+> - **Universal Setup**: Recommended for most users (includes all components).
+> - **Online Setup**: Smallest file size, downloads components during installation.
+> - **Offline Setup**: Best for installing on multiple PCs without internet.
+> - **Browser Extension**: Enhances downloading directly from your browser.
+
+</div>
+
+---
+
 ## About
 
 Zylos is a versatile and powerful desktop application built with Flutter, designed to offer an extensive set of tools via modular plugins. With an advanced, unified installer, Zylos provides users the flexibility of both full offline installations (pre-packaged with essential plugins) and online installations (downloading the latest plugins on the fly).
